@@ -1,0 +1,68 @@
+<h2>Дома</h2>
+<hr>
+<div class="main-div">
+  <div class="form-group">
+    <table class="search">
+      <tr>
+        <td class="search-header">Поиск</td>
+        <td class="search-criteria">
+          <ng-select [searchable]="false" [clearable]="false" [items]="criteria" [hideSelected]="true" bindLabel="name" bindValue="value"
+                     [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
+                     (change)="onChangeSelectCriteria($event)" required>
+          </ng-select>
+        </td>
+        <td class="search-text">
+          <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="findHouses(searchText)"/>
+        </td>
+        <td align="right">
+          <button *ngIf="isAdmin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHouseModal"
+                  (click)="onCreate()">
+            ➕ Добавить
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="main-table">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">Название улицы</th>
+        <th scope="col">Номер дома</th>
+        <th scope="col">Число квартир</th>
+        <th scope="col">Число подъездов</th>
+        <th scope="col">Этажность</th>
+        <th scope="col">Район</th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let house of houses">
+        <td id="col1">{{house?.houseId?.street}}</td>
+        <td id="col2">{{house?.houseId?.houseNumber}}</td>
+        <td id="col3">{{house?.numberOfApartments}}</td>
+        <td id="col4">{{house?.numberOfEntraces}}</td>
+        <td id="col5">{{house?.numberOfFloors}}</td>
+        <td id="col6">{{house?.districtDto?.districtName!}}</td>
+        <td *ngIf="isAdmin" id="col7">
+          <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal"
+                  data-bs-target="#addHouseModal"
+                  (click)="onEdit(house)">
+            ✏
+          </button>
+        </td>
+        <td *ngIf="isAdmin" id="col8">
+          <button type="button" class="btn btn-danger change-btn"
+                  (click)="deleteHouse(house?.houseId.street!, house?.houseId.houseNumber!)">
+            🗑
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-house-modal *ngIf="isShowModal" (emitLoadHouses)="onUpdateHouses()" (emitCloseModal)="onCloseModal()"></app-house-modal>
+

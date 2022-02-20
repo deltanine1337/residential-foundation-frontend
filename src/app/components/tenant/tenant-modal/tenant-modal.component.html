@@ -1,0 +1,60 @@
+<div class="modal fade" id="addTenantModal" tabindex="-1" role="dialog" aria-labelledby="addTenantModal" data-bs-backdrop="static"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{isUpdate ? 'Изменить' : 'Добавить'}} запись</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" (click)="onClose()"></button>
+      </div>
+      <div class="modal-body">
+        <form name="addForm">
+          <div class="form-group">
+            <label for="add-fio" class="col-form-label">ФИО:</label>
+            <input [(ngModel)]="selectedTenant.fio" name="fio" type="text" class="form-control"
+                   id="add-fio" #fio="ngModel" required/>
+            <div [hidden]="fio.valid || fio.untouched" class="alert alert-danger">
+              Некорректное ФИО
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-telNum" class="col-form-label">Номер телефона:</label>
+            <input [(ngModel)]="selectedTenant.telNum" name="telNum" [pattern]="phonePattern" type="tel" maxlength="12"
+                   class="form-control"
+                   id="add-telNum" #telNum="ngModel" required/>
+            <div [hidden]="telNum.valid || telNum.untouched" class="alert alert-danger">
+              Некорректный номер телефона. Формат номера: +7xxxxxxxxxx
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-apartmentNumber" class="col-form-label">Номер квартиры:</label>
+            <input [(ngModel)]="selectedTenant.apartmentNumber" name="apartmentNumber" type="number"
+                   class="form-control"
+                   id="add-apartmentNumber" #apartmentNumber="ngModel" required/>
+            <div [hidden]="apartmentNumber.valid || apartmentNumber.untouched" class="alert alert-danger">
+              Некорректный номер квартиры
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Дом:</label>
+            <ng-select [searchable]="false" [hideSelected]="true" placeholder="Выберите дом" [clearable]="false"
+                       (change)="onChangeSelectHouse($event)" [(ngModel)]="selectedHouse">
+              <ng-option *ngFor="let house of houses" [value]="house">
+                р. {{house?.districtDto?.districtName}}, ул. {{house?.houseId.street}}, д. {{house?.houseId.houseNumber}}
+              </ng-option>
+            </ng-select>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="isUpdate ? updateTenant() : addTenant()"
+                data-bs-dismiss="modal"
+                [disabled]="apartmentNumber.invalid || telNum.invalid || fio.invalid || !isHouseChanged">Сохранить
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@ng-select/ng-select/themes/ant.design.theme.css";
+
+.button-column {
+  width: 5%;
+}
+
+.change-btn {
+  margin:auto;
+  display:block;
+}
+
+.nav-link {
+  font-size: 20px;
+}
+
+h2 {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.main-div {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.add-button {
+  text-align: right;
+  margin-top: 2%;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.search {
+  margin-top: 2%;
+  width: 100%;
+}
+
+.search-header {
+  width: 3%;
+}
+
+.search-criteria {
+  width: 10%;
+}
+
+.search-text {
+  width: 30%;
+}
+
+.search-button {
+  width: 5%;
+}
+
+.main-table {
+  margin-top: 25px;
+}
+
+.log-reg-header {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.log-reg-form {
+  text-align: center;
+  margin-top: 25px;
+  margin-left: 40%;
+  width: 20%;
+  align-content: center;
+}

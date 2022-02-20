@@ -1,0 +1,24 @@
+<h2 class="log-reg-header">Вход</h2>
+<div class="log-reg-form">
+  <p align="center">Логин<input [(ngModel)]="form.username" name="username" type="text" class="form-control"
+                                id="username" #username="ngModel" required/></p>
+  <div [hidden]="username.valid || username.untouched" class="alert alert-danger">
+    Некорректный логин
+  </div>
+  <p align="center">Пароль<input [(ngModel)]="form.password" name="password" type="password" class="form-control"
+                                 id="password" #password="ngModel" required/></p>
+  <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
+    Некорректный пароль
+  </div>
+  <div>
+    <div class="row g-2">
+      <button type="button" class="btn btn-primary" (click)="onSubmit()"
+              data-bs-dismiss="modal"
+              [disabled]="username.invalid || password.invalid">Войти
+      </button>
+      <button type="button" class="btn btn-dark" routerLink="/register">
+        Регистрация
+      </button>
+    </div>
+  </div>
+</div>

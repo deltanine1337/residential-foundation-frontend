@@ -1,0 +1,75 @@
+<div class="modal fade" id="addHouseModal" tabindex="-1" role="dialog" aria-labelledby="addHouseModal" data-bs-backdrop="static"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{isUpdate ? 'Изменить' : 'Добавить'}} запись</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" (click)="onClose()"></button>
+      </div>
+      <div class="modal-body">
+        <form name="addForm">
+          <div class="form-group">
+            <label for="add-street" class="col-form-label">Улица:</label>
+            <input [(ngModel)]="streeet" [readonly]="isUpdate" name="street" type="text" class="form-control"
+                   id="add-street" #street="ngModel" required/>
+            <div [hidden]="street.valid || street.untouched" class="alert alert-danger">
+              Некорректное название улицы
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-houseNumber" class="col-form-label">Номер дома:</label>
+            <input [(ngModel)]="houseeNumber" [readonly]="isUpdate" placeholder="" name="houseNumber" type="number"
+                   class="form-control"
+                   id="add-houseNumber" #houseNumber="ngModel" required/>
+            <div [hidden]="houseNumber.valid || houseNumber.untouched" class="alert alert-danger">
+              Некорректный номер дома
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-apNum" class="col-form-label">Число квартир:</label>
+            <input [(ngModel)]="selectedHouse.numberOfApartments" placeholder="" name="apNum" type="number"
+                   class="form-control"
+                   id="add-apNum" #apNum="ngModel" required/>
+            <div [hidden]="apNum.valid || apNum.untouched" class="alert alert-danger">
+              Некорректное число квартир
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-entraces" class="col-form-label">Число подъездов:</label>
+            <input [(ngModel)]="selectedHouse.numberOfEntraces" placeholder="" name="entraces" type="number"
+                   class="form-control"
+                   id="add-entraces" #entraces="ngModel" required/>
+            <div [hidden]="entraces.valid || entraces.untouched" class="alert alert-danger">
+              Некорректное число подъездов
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-floors" class="col-form-label">Этажность:</label>
+            <input [(ngModel)]="selectedHouse.numberOfFloors" placeholder="" name="floors" type="number"
+                   class="form-control"
+                   id="add-floors" #floors="ngModel" required/>
+            <div [hidden]="floors.valid || floors.untouched" class="alert alert-danger">
+              Некорректная этажность
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Район:</label>
+            <ng-select [clearable]="false" [(ngModel)]="selectedDistrict" name="selectedDistr" [searchable]="false"
+                       placeholder="Выберите район" bindLabel="districtName"
+                       [items]="districts" (change)="onChangeSelectDistrict($event)">
+            </ng-select>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="isUpdate ? updateHouse() : addHouse()"
+                data-bs-dismiss="modal"
+                [disabled]="floors.invalid || entraces.invalid || apNum.invalid || houseNumber.invalid ||
+                street.invalid || !isDistrictChanged">Сохранить
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

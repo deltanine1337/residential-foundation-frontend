@@ -1,0 +1,42 @@
+<h2>Районы</h2>
+<hr>
+<div class="main-div">
+  <div class="add-button" id="btnAddNew">
+    <button *ngIf="isAdmin" type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#addDistrictModal"
+            (click)="onCreate()">
+      ➕ Добавить
+    </button>
+  </div>
+
+  <div align="center" class="main-table">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">Название</th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let district of districts ">
+        <td id="col1">{{district?.districtName}}</td>
+        <td *ngIf="isAdmin" id="col2">
+          <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal"
+                  data-bs-target="#addDistrictModal"
+                  (click)="onEdit(district)">
+            ✏
+          </button>
+        </td>
+        <td *ngIf="isAdmin" id="col3">
+          <button type="button" class="btn btn-danger change-btn" (click)="deleteDistrict(district?.districtId!)">
+            🗑
+          </button>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-district-modal *ngIf="isShowModal" (emitLoadDistricts)="onUpdateDistricts()" (emitCloseModal)="onCloseModal()"></app-district-modal>

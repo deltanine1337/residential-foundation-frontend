@@ -1,0 +1,33 @@
+<div class="modal fade" id="addDistrictModal" tabindex="-1" role="dialog" aria-labelledby="addDistrictModal" data-bs-backdrop="static"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{isUpdate ? 'Изменить' : 'Добавить'}} запись</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" (click)="onClose()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form name="addForm">
+          <div class="form-group">
+            <label for="add-district-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="selectedDistrict.districtName" name="districtName" type="text" class="form-control"
+                   id="add-district-name" #districtName="ngModel" required/>
+            <div [hidden]="districtName.valid || districtName.untouched" class="alert alert-danger">
+              Некорректное название района
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="isUpdate ? updateDistrict() : addDistrict()"
+                data-bs-dismiss="modal"
+                [disabled]="districtName.invalid">Сохранить
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
