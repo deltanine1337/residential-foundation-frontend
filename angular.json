@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "test_task_front": {
+    "residential_foundation_frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/test_task_front",
+            "outputPath": "dist/residential_foundation_frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "test_task_front:build:production"
+              "browserTarget": "residential_foundation_frontend:build:production"
             },
             "development": {
-              "browserTarget": "test_task_front:build:development"
+              "browserTarget": "residential_foundation_frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "test_task_front:build"
+            "browserTarget": "residential_foundation_frontend:build"
           }
         },
         "test": {
@@ -112,5 +112,5 @@
       }
     }
   },
-  "defaultProject": "test_task_front"
+  "defaultProject": "residential_foundation_frontend"
 }
